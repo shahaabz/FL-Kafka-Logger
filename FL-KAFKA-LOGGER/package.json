@@ -1,0 +1,14 @@
+{
+  "name": "fl-kafka-logger",
+  "version": "1.0.0",
+  "description": "Log data into kafka server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Syed Shahaab",
+  "license": "ISC",
+  "dependencies": {
+    "kafka-node": "^4.1.3"
+  }
+}
