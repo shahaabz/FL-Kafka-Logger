@@ -9,8 +9,8 @@ class FlKafkaLogger {
 
         this.topic = kafkaConfig.topic;
         this.partition = !kafkaConfig.partition ? 0 : kafkaConfig.partition;
-        this.client = new kafka.KafkaClient({ kafkaHost: kafkaConfig.host });
-        this.Producer = kafka.Producer;
+        const client = new kafka.KafkaClient({ kafkaHost: kafkaConfig.host });
+        const Producer = kafka.Producer;
         this.producer = new Producer(client);
     }
 
@@ -22,7 +22,7 @@ class FlKafkaLogger {
      * @param {JSON} data
      * @memberof FlKafkaLogger
      */
-    logFlData = (statusCode, methodName, appName, data) => {
+    logFlData(statusCode, methodName, appName, data) {
         return new Promise((resolve, reject) => {
             statusCode = statusCode ? statusCode : '';
 
@@ -38,10 +38,10 @@ class FlKafkaLogger {
                 metaData: data
             }
 
-            let payloads = [{ topic: this.topic, messages: logData, partition: this.partition }];
+            let payloads = [{ topic: this.topic, messages: JSON.stringify(logData), partition: this.partition }];
             try {
                 this.producer.on('ready', () => {
-                    producer.send(payloads, (error, data) => {
+                    this.producer.send(payloads, (error, data) => {
                         if (error) {
                             return reject(error);
                         }
@@ -59,4 +59,4 @@ class FlKafkaLogger {
     }
 }
 
-module.exports = FlKafkaLogger();
+module.exports = FlKafkaLogger;
