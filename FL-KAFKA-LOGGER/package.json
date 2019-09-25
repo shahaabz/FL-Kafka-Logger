@@ -1,6 +1,6 @@
 {
   "name": "fl-kafka-logger",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Log data into kafka server",
   "main": "index.js",
   "scripts": {
